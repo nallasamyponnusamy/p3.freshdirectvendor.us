@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Cambridge Heating Oil Company Delivery Schedule and Manifest</title>
+
+
+    <!--CSS-->
+    <link rel="stylesheet" href="styles/style.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="styles/print.css" type="text/css" media="print">
+    <link type="text/css" href="styles/jquery-ui-1.8.16.custom.css" rel="stylesheet"/>
+
+    <!-- JavaScripts -->
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.geocomplete.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="scripts/BpTspSolver.js"></script>
+    <script type="text/javascript" src="scripts/directions-export.js"></script>
+    <script type="text/javascript" src="scripts/travellingSalesMan.js"></script>
+    <script type="text/javascript" src="scripts/p3script.js"></script>
+</head>
+
+<body onLoad="onBodyLoad()">
+<div id="fb-root"></div>
+
+<h2>Cambridge Heating Oil Company - Delivery Schedule & Manifest</h2>
+<input type='button' id='print-button' value='Print' class='btn'>
+<table class='mainTable'>
+    <tr>
+        <td class='left' style='vertical-align: top'>
+            <div id="leftPanel">
+                <div id="accordion" style='width: auto'>
+                    <!--Start with Route information-->
+                    <h3><a href="#" class='accHeader'> 1. Route / Truck Information</a></h3>
+
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    Date
+                                    <input type='date' id='date' maxlength="10">
+                                </td>
+                                <td>
+                                    Route Number
+                                    <input type='text' id='routenumber' maxlength="30">
+                                </td>
+                                <td>
+                                    Truck License Plate
+                                    <input type='text' id='trklicense' maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Truck Capacity
+                                    <input type='text' id='truckcap' maxlength="10">
+                                </td>
+                                <td>
+                                    Truck Starting Address (Depot)
+                                    <input id="depot" type="text" placeholder="Type in Starting Address"
+                                           value="Harvard Square, Cambridge, MA 02138"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3><a href="#" class='accHeader'>2. Enter Driver Information</a></h3>
+
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    Employee ID
+                                    <input type='text' id='employeeid' maxlength="10">
+                                </td>
+                                <td>
+                                    Driver First Name
+                                    <input type='text' id='dfname' maxlength="30">
+                                </td>
+                                <td>
+                                    Driver Last Name
+                                    <input type='text' id='dlname' maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cell Phone Number
+                                    <input type='text' id='cellno' maxlength="10">
+                                </td>
+                                <td>
+                                    Supervisor Name
+                                    <input type='text' id='supname' maxlength="30">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--Shift information-->
+                    <h3><a href="#" class='accHeader'>3. Enter Shift Duration</a></h3>
+
+                    <div>
+                        Shift Time in Hours
+                        <input type='text' id='shift' maxlength="2">
+                    </div>
+
+                    <!--Order Details and Route Optimization -->
+                    <h3><a href="#" class='accHeader'>4. Enter Order Details</a></h3>
+
+                    <div>
+                        <!--<form name="address" onSubmit="clickedAddAddress(); return false;">-->
+                        <form name="address" onSubmit="return false">
+                            Add Location by Address:
+                            <table>
+                                <tr>
+                                    <td><input name="name" id="name" type="text"></td>
+                                    <td><input id="addressStr" name="addressStr" type="text"></td>
+                                    <td><input id="quantity" name="quantity" type="text"></td>
+                                    <td><input id="time" name="time" type="hidden"></td>
+                                    <td><input type="button" value="Add!" onClick=" addDelivery();">
+                                </tr>
+                            </table>
+                        </form>
+
+                        <div id='orderdetails'>
+                            <table border="1" cellpadding="15">
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <th>Delivery Address</th>
+                                    <th>Quantity (in Gallons)</th>
+                                    <th>Time Required for Delivery</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3><a href="#" class='accHeader'>5. Optimize Delivery Route</a></h3>
+
+                    <div>
+                        <p>Use this option only if there is any special requirement
+                            to route the trucks with following options. </p>
+
+                        <form name="travelOpts">
+                            <input id="avoidHighways" type="checkbox"/> Avoid highways<br>
+                            <input id="avoidTolls" type="checkbox"/> Avoid toll roads
+                        </form>
+                        <br>
+
+                        <div>
+                            <input id="button1" class="calcButton" type="button" value="Optimize Delivery Route"
+                                   onClick="directions(0, document.forms['travelOpts'].avoidHighways.checked, document.forms['travelOpts'].avoidTolls.checked)">
+                        </div>
+                    </div>
+
+                    <h3><a href="#" class='accHeader'>6. Edit Order Route Sequence </a></h3>
+
+                    <div>
+                        <p>You may Delete a Delivery or change the sequence by Dragging and Dropping - Remember the
+                            route is already optimized with travelling sales man algorithm.</p>
+
+                        <div id="routeDrag"></div>
+                        <div id="reverseRoute"></div>
+                    </div>
+
+                    <h3><a href="#" class='accHeader'>Help</a></h3>
+
+                    <div>
+                        <p>To use this Delivery Routing Optimization tool</p>
+                        <p>Follow the steps as given in the menu starting with - 1. Route and Truck Information
+                        After that, continue until Step - 4. In this step enter order information with customer name
+                        , Address and Quantity of oil in gallons, System will generate a RANDOM duration for delivery</p>
+                        <p> Then choose Step-5 and click optimize route (Map should also get updated automatically)</p>
+
+                        <p> If you want you may choose to edit the delivery sequence or delete in Step - 6 </p>
+
+                        <p>If more than 15 locations are specified, you are not guaranteed
+                            to get the optimal solution, but the solution is likely to be close
+                            to the best possible.</p>
+
+                        <p> Note: You can also  simply left-click the map or enter an address
+                            and do simple optimized routing with out orders </p>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class='right' style='vertical-align: top'>
+            <div id="map" class="myMap"></div>
+            <div id="path" class="pathdata"></div>
+            <div id="my_textual_div"></div>
+        </td>
+    </tr>
+</table>
+
+<div id="dialogProgress" title="Calculating route...">
+    <div id="progressBar"></div>
+</div>
+
+</body>
+</html>
