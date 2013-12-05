@@ -350,7 +350,10 @@ function startOver() {
     var zoom = gebMap.getZoom();
     var mapDiv = gebMap.getDiv();
     initMap(center, zoom, mapDiv);
+
+
     tsp.startOver(); // doesn't clearOverlays or clear the directionsPanel
+
 }
 
 function directions(m, walking, bicycling, avoidHighways, avoidTolls) {
@@ -426,7 +429,7 @@ function onSolveCallback(myTsp) {
     for (var i = 1; i < dir.legs.length; ++i) {
         var finalI = i;
         jQuery("#dragClose" + i).button({
-            icons: { primary: "ui-icon-closethick" },
+            icons: { primary: "ui-icon-close" },
             text: false
         }).click(function () {
                 tsp.removeStop(parseInt(this.value), null);
@@ -463,6 +466,7 @@ function onSolveCallback(myTsp) {
     if (dirRenderer != null) {
         dirRenderer.setMap(null);
     }
+
     dirRenderer = new google.maps.DirectionsRenderer({
         directions: dirRes,
         hideRouteList: true,
@@ -473,35 +477,35 @@ function onSolveCallback(myTsp) {
         suppressMarkers: true });
 
     // Raw path output
-    var bestPathLatLngStr = dir.legs[0].start_location.toString() + "\n";
-    for (var i = 0; i < dir.legs.length; ++i) {
-        bestPathLatLngStr += dir.legs[i].end_location.toString() + "\n";
-    }
-    document.getElementById("exportData_hidden").innerHTML =
-        "<textarea id='outputList' rows='10' cols='40'>"
-            + bestPathLatLngStr + "</textarea><br>";
-
-    // Raw path output with labels
-    var labels = tsp.getLabels();
-    var order = tsp.getOrder();
-    var bestPathLabelStr = "";
-    if (labels[order[0]] == null) {
-        bestPathLabelStr += order[0];
-    } else {
-        bestPathLabelStr += labels[order[0]];
-    }
-    bestPathLabelStr += ": " + dir.legs[0].start_location.toString() + "\n";
-    for (var i = 0; i < dir.legs.length; ++i) {
-        if (labels[order[i + 1]] == null) {
-            bestPathLabelStr += order[i + 1];
-        } else {
-            bestPathLabelStr += labels[order[i + 1]];
-        }
-        bestPathLabelStr += ": " + dir.legs[i].end_location.toString() + "\n";
-    }
-    document.getElementById("exportLabelData_hidden").innerHTML =
-        "<textarea id='outputLabelList' rows='10' cols='40'>"
-            + bestPathLabelStr + "</textarea><br>";
+//    var bestPathLatLngStr = dir.legs[0].start_location.toString() + "\n";
+//    for (var i = 0; i < dir.legs.length; ++i) {
+//        bestPathLatLngStr += dir.legs[i].end_location.toString() + "\n";
+//    }
+//    document.getElementById("exportData_hidden").innerHTML =
+//        "<textarea id='outputList' rows='10' cols='40'>"
+//            + bestPathLatLngStr + "</textarea><br>";
+//
+//    // Raw path output with labels
+//    var labels = tsp.getLabels();
+//    var order = tsp.getOrder();
+//    var bestPathLabelStr = "";
+//    if (labels[order[0]] == null) {
+//        bestPathLabelStr += order[0];
+//    } else {
+//        bestPathLabelStr += labels[order[0]];
+//    }
+//    bestPathLabelStr += ": " + dir.legs[0].start_location.toString() + "\n";
+//    for (var i = 0; i < dir.legs.length; ++i) {
+//        if (labels[order[i + 1]] == null) {
+//            bestPathLabelStr += order[i + 1];
+//        } else {
+//            bestPathLabelStr += labels[order[i + 1]];
+//        }
+//        bestPathLabelStr += ": " + dir.legs[i].end_location.toString() + "\n";
+//    }
+//    document.getElementById("exportLabelData_hidden").innerHTML =
+//        "<textarea id='outputLabelList' rows='10' cols='40'>"
+//            + bestPathLabelStr + "</textarea><br>";
 
     // Optimal address order
     var addrs = tsp.getAddresses();

@@ -238,3 +238,22 @@ button.ui-button-icon-only {
     height: 100%;
 }
 
+#orderdetails table {
+	border-style: solid;
+    border-width: thin;
+	border-bottom: none;
+}
+#orderdetails td {
+	border-style: solid;
+    border-width: thin;
+}
+#orderdetails th {
+	background-color: #999;
+	color: #fff;
+	font-weight: bold;
+}
+.err {
+	font-size: 14px;
+	font-weight: bold;
+	color: #f00;
+}

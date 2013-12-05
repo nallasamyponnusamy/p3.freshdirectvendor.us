@@ -201,3 +201,9 @@ table.mainTable {
 table.mainTable td.left {
     width: 0px;
 }
+div#path.pathdata {
+    width: 100%;
+    text-align: center;
+    font-family: arial, sans-serif;
+    font-size:18;
+}
