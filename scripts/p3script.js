@@ -5,7 +5,7 @@
 jQuery.noConflict();
 
 function onBodyLoad() {
-	google.load("maps", "3", {callback: init, other_params: "sensor=false"});
+    google.load("maps", "3", {callback: init, other_params: "sensor=false"});
 }
 
 
@@ -30,7 +30,7 @@ function toggle(divId) {
 }
 
 jQuery(function () {
-	onBodyLoad();
+    onBodyLoad();
 
     //Auto Complete Plugin for geocoding
     // jQuery("#depot").geocomplete();
@@ -39,7 +39,8 @@ jQuery(function () {
     jQuery("#accordion").accordion({
         collapsible: true,
         autoHeight: false,
-        clearStyle: true
+        clearStyle: true,
+        event: false
     });
     jQuery("input:button").button();
     jQuery("#dialogProgress").dialog({
@@ -49,18 +50,16 @@ jQuery(function () {
     });
     jQuery("#progressBar").progressbar({ value: 0 });
 
-
+    // date picker from UI
     jQuery("#date").datepicker();
 
+    // Map window size
     jQuery('.myMap').height(jQuery(window).height() - 80.);
 
 
     jQuery('#print-button').click(function () {
         alert("boo");
-
-
         jQuery('#manifest').append('Driver Name' + jQuery('#dfname').val());
-
 //         then use the canvas 2D drawing functions to add text, etc. for the result
 //        window.open('', document.getElementById('#map').toDataURL());
         var print_window = window.open('', '_blank', '');
@@ -80,7 +79,33 @@ jQuery(function () {
 
     });
 
-
+    //Use this function to validate the menus and to take the user in a sequence
+    jQuery('#accordion h3').click(function (event) {
+        var active = jQuery( "#accordion" ).accordion( "option", "active" );
+        if (active>6)
+        {
+            active = -1;
+          }
+        var newactive = active+1;
+        if (validate()) {
+            jQuery("#accordion").accordion('activate', newactive);
+            alert('boo,'+newactive);
+        } else {
+            jQuery(function () {
+                jQuery("#dialog").append('<p> You must fill in all the required informations to continue!</p>');
+                jQuery("#dialog").prop('title', 'Sorry, You have missed something!');
+                jQuery("#dialog").dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            jQuery(this).dialog("close");
+                        }
+                    }
+                });
+            });
+        }
+        event.stopPropagation();
+    });
 });
 
 /* simple phone number validator
@@ -88,160 +113,148 @@ jQuery(function () {
  *		accepts numbs, '1234567890' or '1-123-456-7890'
  *	returns true/false validation
  */
-	function phoneCheck(valVar) {
-		//check for param, or default to 0. change to a string for match
-		var val = ((arguments.length) ? arguments[0]: 0).toString();
-		//replace out dashes if they exist, then match against 10 digits
-		return (val.replace(/\-/g, '').match(/^\d{10}/)) ? true:false;
-	}
+function phoneCheck(valVar) {
+    //check for param, or default to 0. change to a string for match
+    var val = ((arguments.length) ? arguments[0] : 0).toString();
+    //replace out dashes if they exist, then match against 10 digits
+    return (val.replace(/\-/g, '').match(/^\d{10}/)) ? true : false;
+}
 
 /* copy of addAddress from library to do validation instead
  *	passing in dual callbacks to handle validation since it's an ajax call
  */
- 
-	function addressCheck(address, successCallback, errorCallback) {
-		//make sure all three params are passed in
-		if (arguments.length != 3) { return; }
 
-		//addressProcessing = true;
-		new google.maps.Geocoder().geocode({ address: address }, function(results, status) {
-			console.log(status);
-			if (status == google.maps.GeocoderStatus.OK) {
-				if (typeof(successCallback) == 'function')
-					successCallback(address);
-			} else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-				//call again
-				setTimeout(function(){ addressCheck(address, successCallback, errorCallback) }, 100); 
-			} else {
-				if (typeof(errorCallback) == 'function')
-					errorCallback(address);
-			}
-		});
-	}
+function addressCheck(address, successCallback, errorCallback) {
+    //make sure all three params are passed in
+    if (arguments.length != 3) {
+        return;
+    }
+
+    //addressProcessing = true;
+    new google.maps.Geocoder().geocode({ address: address }, function (results, status) {
+        console.log(status);
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (typeof(successCallback) == 'function')
+                successCallback(address);
+        } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+            //call again
+            setTimeout(function () {
+                addressCheck(address, successCallback, errorCallback)
+            }, 100);
+        } else {
+            if (typeof(errorCallback) == 'function')
+                errorCallback(address);
+        }
+    });
+}
 
 /* simple phone number validator
  *	pass in value as String
  *		accepts numbs, '1234567890' or '1-123-456-7890'
  *	returns true/false validation
  */
-	function phoneCheck(valVar) {
-		//check for param, or default to 0. change to a string for match
-		var val = ((arguments.length) ? arguments[0] : 0).toString();
-		//replace out dashes if they exist, then match against 10 digits
-		return (val.replace(/[^0-9]/g, '').match(/^\d{10}/)) ? true:false;
-	}
+function phoneCheck(valVar) {
+    //check for param, or default to 0. change to a string for match
+    var val = ((arguments.length) ? arguments[0] : 0).toString();
+    //replace out dashes if they exist, then match against 10 digits
+    return (val.replace(/[^0-9]/g, '').match(/^\d{10}/)) ? true : false;
+}
 
 /* simple qty validator
  *	assumes qty should be a number and can have a decimal, but should be > 0
  *	returns true/false validation
  */
-	function qtyCheck(valVar) {
-		//check for param, or default to 0. change to a string for match
-		var val = ((arguments.length) ? arguments[0] : 0).toString();
-		//match against digits and decimal, and make sure it's over 0
-		return (val.match(/^[\d.]+$/) && parseInt(val) > 0) ? true:false;
-	}
+function qtyCheck(valVar) {
+    //check for param, or default to 0. change to a string for match
+    var val = ((arguments.length) ? arguments[0] : 0).toString();
+    //match against digits and decimal, and make sure it's over 0
+    return (val.match(/^[\d.]+$/) && parseInt(val) > 0) ? true : false;
+}
 
 /* clear form fields on page of text type
  */
-	function clearAllTextInputs() {
-		jQuery(':input').filter(':text').val('');
-	}
+function clearAllTextInputs() {
+    jQuery(':input').filter(':text').val('');
+}
 
 /* reset page handler, since we need to do several things */
-	function resetPage() {
-		//clear inputs
-		clearAllTextInputs();
-		//remove appended table data
-		jQuery("#orderdetails").empty();
-		//and error msgs
-		jQuery('.err').hide();
-		//call old startOver method
-		startOver();
-	}
+function resetPage() {
+    //clear inputs
+    clearAllTextInputs();
+    //remove appended table data
+    jQuery("#orderdetails").empty();
+    //and error msgs
+    jQuery('.err').hide();
+    //call old startOver method
+    startOver();
+}
 
 /* do things with the field validations */
-	function addDeliveryValidator(onAllValid) {
-		var name = jQuery("#name");
-		var address = jQuery("#addressStr");
-		var quantity = jQuery("#quantity");
-		var hasError = false;
+function addDeliveryValidator(onAllValid) {
+    var name = jQuery("#name");
+    var address = jQuery("#addressStr");
+    var quantity = jQuery("#quantity");
+    var hasError = false;
 
-		//assuming name can have any chars and isn't validated other than empty
-		if (name.val() == '') {
-			//show name isn't correct
-			jQuery('#nameErr').show();
-			hasError = true;
-		} else {
-			jQuery('#nameErr').hide();
-		}
+    //assuming name can have any chars and isn't validated other than empty
+    if (name.val() == '') {
+        //show name isn't correct
+        jQuery('#nameErr').show();
+        hasError = true;
+    } else {
+        jQuery('#nameErr').hide();
+    }
 
-		if (quantity.val() == '') {
-			//show name isn't correct
-			jQuery('#qtyErr').show();
-			hasError = true;
-		} else {
-			jQuery('#qtyErr').hide();
-		}
+    if (quantity.val() == '') {
+        //show name isn't correct
+        jQuery('#qtyErr').show();
+        hasError = true;
+    } else {
+        jQuery('#qtyErr').hide();
+    }
 
-		
-		if (address.val() == '') {
-			//show address isn't correct
-			//addressErr doesn't have a msg, so set it first
-			jQuery('#addressErr').html('Please enter an Address').show();
-		} else {
-			//hide old errors
-			jQuery('#addressErr').hide();
 
-			//only call if there's no other errors, to save the ajax call
-			if (!hasError) {
-				var sCall = function () {
-					if (!hasError) {
-						onAllValid();
-					}
-				};
-				//call address checker. this needs to handle showing the error msg as well
-				//so we'll pass success and error callbacks
-				addressCheck(address.val(), sCall, function() {
-					jQuery('#addressErr').html('Unable to geocode address.').show();
-				});
-			}
-		}
-	}
+    if (address.val() == '') {
+        //show address isn't correct
+        //addressErr doesn't have a msg, so set it first
+        jQuery('#addressErr').html('Please enter an Address').show();
+    } else {
+        //hide old errors
+        jQuery('#addressErr').hide();
+
+        //only call if there's no other errors, to save the ajax call
+        if (!hasError) {
+            var sCall = function () {
+                if (!hasError) {
+                    onAllValid();
+                }
+            };
+            //call address checker. this needs to handle showing the error msg as well
+            //so we'll pass success and error callbacks
+            addressCheck(address.val(), sCall, function () {
+                jQuery('#addressErr').html('Unable to geocode address.').show();
+            });
+        }
+    }
+}
 
 function addDelivery() {
-	//call field validators. this calls an address check, which is ajax, so it has to handle success, pass in success function
-	addDeliveryValidator(function() {
-		
-		var name = jQuery("#name");
-		var address = jQuery("#addressStr");
-		var quantity = jQuery("#quantity");
-		var time = jQuery("#time");
-		var orderdetails = jQuery("#orderdetails");
-		//headers
-		if (orderdetails.html() == '') {
-			orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th><th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">Time Required for Delivery</th></tr></table>');
-		}
+    //call field validators. this calls an address check, which is ajax, so it has to handle success, pass in success function
+    addDeliveryValidator(function () {
 
-		time.val(Math.ceil(calculateTime(quantity.val())));
-
-		orderdetails.append('<table cellpadding="7" width="85%" cellspacing="0" border="1"><tr><td width="30%">' + name.val() + '</td><td width="40%">' + address.val() + '</td><td width="15%">' + quantity.val() + '</td><td width="15%">' + time.val() + '</td></tr></table>');
-
-		//jQuery("#orderdetails").append('<div> <span>' + jQuery("#name").val() + '</span><span>' + jQuery("#addressStr").val() + '</span><span>' + //jQuery("#quantity").val() + '</span><span>' + jQuery("#time").val() + '</span></div>');
-		//jQuery("#orderdetails").append('</table>');
-
-		//    var table = jQuery('<table border="1" cellpadding="15"><tr><th>Customer Name</th> <th>Delivery Address</th> <th>Quantity (in Gallons)</th> <th>Time Required for Delivery</th> </tr> </table>').addClass('foo');
-		//    for(i=0; i<1; i++){
-		////        var row = jQuery('<tr></tr>').addClass('bar').text('<td>'+jQuery("#name").val()+'</td><td>'+jQuery("#addressStr").val()+'</td><td>'+jQuery("#quantity").val()+'</td><td>'+jQuery("#time").val()+'</td>'+ i);
-		//
-		////    var row = jQuery('<td></td>').addClass('bar').text(jQuery("#name").val()+'<td>'+jQuery("#addressStr").val()+'</td>'+jQuery("#quantity").val()+'<td>'+jQuery("#time").val()+'</td>')+i);
-		////    )
-		////        table.append(row);
-		//    }
-		//
-		//    jQuery('#orderdetails').append(table);
-		clickedAddAddress();
-	});
+        var name = jQuery("#name");
+        var address = jQuery("#addressStr");
+        var quantity = jQuery("#quantity");
+        var time = jQuery("#time");
+        var orderdetails = jQuery("#orderdetails");
+        //headers
+        if (orderdetails.html() == '') {
+            orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th><th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">Time Required for Delivery</th></tr></table>');
+        }
+        time.val(Math.ceil(calculateTime(quantity.val())));
+        orderdetails.append('<table cellpadding="7" width="85%" cellspacing="0" border="1"><tr><td width="30%">' + name.val() + '</td><td width="40%">' + address.val() + '</td><td width="15%">' + quantity.val() + '</td><td width="15%">' + time.val() + '</td></tr></table>');
+        clickedAddAddress();
+    });
 
 }
 
@@ -257,9 +270,33 @@ function addDepot() {
     if (address == '') {
         return;
     }
-//    alert(jQuery("#addressStr".val();
+    jQuery(function () {
+        jQuery("#dialog").prop('title', 'You have selected');
+        var originalContent;
+        jQuery("#dialog").dialog({
+            modal: true,
+            buttons: {
+                Ok: function () {
+                    jQuery(this).dialog("close");
+                }
+            },
+
+            open : function(event, ui) {
+
+////        jQuery("#dialog").clearData();
+                jQuery("#dialog").append('<p>' + ' Your starting depot as' + jQuery("#saddressStr").val() + '</p>');
+                originalContent = jQuery("#dialog").html();
+            },
+            close : function(event, ui) {
+//                jQuery("#dialog").html(originalContent);
+                jQuery("#dialog").html(resetPage());
+            alert('Close');
+            }
+        });
+
     clickedAddAddress();
     clearOrders();
+});
 }
 /*function printarray() {
  var elems = document.getElementsByTagName( "#orderdetails" );
@@ -277,14 +314,21 @@ function addDepot() {
  jQuery("#addressStr").trigger("geocode");
  });
  }
- *//**/
+ */
+/**/
 function clearOrders() {
 /* jQuery("#saddressStr").val("");
-    jQuery("#name").val("");
-    jQuery("#quantity").val("");*/
+    alert("#saddressStr".val());
+//     jQuery("#name").val("");
+//     jQuery("#quantity").val("");*/
 
 //        $(this).closest('address').find("input[type=text], textarea").val("");
 
 
 //    $('#address')[0].reset();
+}
+
+function validate() {
+return(true);
+
 }
