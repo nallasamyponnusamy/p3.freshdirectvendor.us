@@ -8,7 +8,7 @@ function onBodyLoad() {
     google.load("maps", "3", {callback: init, other_params: "sensor=false"});
 }
 
-
+//if we detect user location pan it in the startup map or use Cambridge, MA as default
 function init() {
     if (google.loader.ClientLocation != null) {
         latLng = new google.maps.LatLng(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
@@ -35,7 +35,7 @@ jQuery(function () {
     //Auto Complete Plugin for geocoding
     // jQuery("#depot").geocomplete();
 
-
+//Accordion Menu
     jQuery("#accordion").accordion({
         collapsible: true,
         autoHeight: false,
@@ -56,10 +56,10 @@ jQuery(function () {
     // Map window size
     jQuery('.myMap').height(jQuery(window).height() - 80.);
 
-
+//Print button to print only the direction
     jQuery('#print-button').click(function () {
         alert("boo");
-        jQuery('#manifest').append('Driver Name' + jQuery('#dfname').val());
+//        jQuery('#manifest').append('Driver Name' + jQuery('#dfname').val());
 //         then use the canvas 2D drawing functions to add text, etc. for the result
 //        window.open('', document.getElementById('#map').toDataURL());
         var print_window = window.open('', '_blank', '');
@@ -81,27 +81,37 @@ jQuery(function () {
 
     //Use this function to validate the menus and to take the user in a sequence
     jQuery('#accordion h3').click(function (event) {
-        var active = jQuery( "#accordion" ).accordion( "option", "active" );
-        if (active>6)
-        {
+        var active = jQuery("#accordion").accordion("option", "active");
+        if (active > 5) {
             active = -1;
-          }
-        var newactive = active+1;
-        if (validate()) {
+        }
+        var newactive = active + 1;
+        if (validate(active)) {
+            if (active == 1) {
+                addDepot();
+            }
             jQuery("#accordion").accordion('activate', newactive);
-            alert('boo,'+newactive);
+//            alert('boo,' + newactive);
         } else {
             jQuery(function () {
-                jQuery("#dialog").append('<p> You must fill in all the required informations to continue!</p>');
                 jQuery("#dialog").prop('title', 'Sorry, You have missed something!');
+                var originalContent;
                 jQuery("#dialog").dialog({
                     modal: true,
                     buttons: {
                         Ok: function () {
                             jQuery(this).dialog("close");
                         }
+                    },
+                    open: function (event, ui) {
+                        jQuery("#dialog").append('<p> You must fill in all the required informations to continue!</p>');
+                        originalContent = jQuery("#dialog").html();
+                    },
+                    close: function (event, ui) {
+                        jQuery("#dialog").html('');
                     }
                 });
+
             });
         }
         event.stopPropagation();
@@ -186,6 +196,10 @@ function resetPage() {
     //and error msgs
     jQuery('.err').hide();
     //call old startOver method
+
+    //reset accordion menu
+    jQuery("#accordion").accordion('activate', 0);
+
     startOver();
 }
 
@@ -196,7 +210,7 @@ function addDeliveryValidator(onAllValid) {
     var quantity = jQuery("#quantity");
     var hasError = false;
 
-    //assuming name can have any chars and isn't validated other than empty
+    /*assuming name can have any chars and isn't validated other than empty*/
     if (name.val() == '') {
         //show name isn't correct
         jQuery('#nameErr').show();
@@ -237,7 +251,7 @@ function addDeliveryValidator(onAllValid) {
         }
     }
 }
-
+var orderArray = {};
 function addDelivery() {
     //call field validators. this calls an address check, which is ajax, so it has to handle success, pass in success function
     addDeliveryValidator(function () {
@@ -247,31 +261,44 @@ function addDelivery() {
         var quantity = jQuery("#quantity");
         var time = jQuery("#time");
         var orderdetails = jQuery("#orderdetails");
+
+
         //headers
         if (orderdetails.html() == '') {
-            orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th><th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">Time Required for Delivery</th></tr></table>');
+            orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th><th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">System Calculated Delivery Time</th></tr></table>');
         }
         time.val(Math.ceil(calculateTime(quantity.val())));
         orderdetails.append('<table cellpadding="7" width="85%" cellspacing="0" border="1"><tr><td width="30%">' + name.val() + '</td><td width="40%">' + address.val() + '</td><td width="15%">' + quantity.val() + '</td><td width="15%">' + time.val() + '</td></tr></table>');
+
+//        Add orders into Array for later reference
+//        orderArray.push(name, address, quantity);
+        var str = address.val();
+        orderArray[address.val()] = {
+            "name": name.val(),
+            "address": address.val(),
+            "quantity": quantity.val()
+        };
+        for ( var i in orderArray ) {
+            alert( orderArray[ i ] );
+        }
         clickedAddAddress();
     });
 
 }
-
 
 function calculateTime(quantity) {
     var fixedtime = Math.random();
     return  quantity * fixedtime;
 
 }
-
+//Get the starting and additional depot routes
 function addDepot() {
     jQuery("#addressStr").val(jQuery("#saddressStr").val());
     if (address == '') {
         return;
     }
     jQuery(function () {
-        jQuery("#dialog").prop('title', 'You have selected');
+        jQuery("#dialog").prop('title', 'You have added');
         var originalContent;
         jQuery("#dialog").dialog({
             modal: true,
@@ -280,23 +307,18 @@ function addDepot() {
                     jQuery(this).dialog("close");
                 }
             },
-
-            open : function(event, ui) {
-
-////        jQuery("#dialog").clearData();
-                jQuery("#dialog").append('<p>' + ' Your starting depot as' + jQuery("#saddressStr").val() + '</p>');
+            open: function (event, ui) {
+                jQuery("#dialog").append('<p>' + ' Your Starting Address is - ' + jQuery("#addressStr").val() + '</p>');
                 originalContent = jQuery("#dialog").html();
             },
-            close : function(event, ui) {
-//                jQuery("#dialog").html(originalContent);
-                jQuery("#dialog").html(resetPage());
-            alert('Close');
+            close: function (event, ui) {
+                jQuery("#dialog").html('');
             }
         });
 
-    clickedAddAddress();
-    clearOrders();
-});
+        clickedAddAddress();
+        clearOrders();
+    });
 }
 /*function printarray() {
  var elems = document.getElementsByTagName( "#orderdetails" );
@@ -317,10 +339,10 @@ function addDepot() {
  */
 /**/
 function clearOrders() {
-/* jQuery("#saddressStr").val("");
-    alert("#saddressStr".val());
-//     jQuery("#name").val("");
-//     jQuery("#quantity").val("");*/
+    /* jQuery("#saddressStr").val("");
+     alert("#saddressStr".val());
+     //     jQuery("#name").val("");
+     //     jQuery("#quantity").val("");*/
 
 //        $(this).closest('address').find("input[type=text], textarea").val("");
 
@@ -328,7 +350,27 @@ function clearOrders() {
 //    $('#address')[0].reset();
 }
 
-function validate() {
-return(true);
+function validate(active) {
+    var elemArr = [];
 
+
+   if (active == 1) {
+            elemArr.push(jQuery("#date"));
+            elemArr.push(jQuery("#routenumber"));
+            elemArr.push(jQuery("#trklicense"));
+
+            return checkForNotBlank(elemArr);
+    }
+    return(true);
+
+}
+
+function checkForNotBlank(arr) {
+    var err =false;
+    jQuery(arr).each(function(i,e) {
+        if (jQuery(e).val() == '') {
+            err=true;
+        }
+    });
+    return !err;
 }

@@ -98,17 +98,23 @@ function formatDirections(gdir, mode) {
             var latLng = gdir.legs[prevI].end_location;
             headerStr = gdir.legs[i].start_location.toString();
         }
+        var nameStr = '', addressStr = '', quantityStr = '';
+        if (orderArray.hasOwnProperty(headerStr) && orderArray[headerStr].hasOwnProperty("name")) {
+            nameStr = orderArray[headerStr].name;
+            addressStr = orderArray[headerStr].address;
+            quantityStr = orderArray[headerStr].quantity;
+        }
         dragStr += "<li id='" + i + "' class='ui-state-"
             + (i ? "default" : "disabled") + "'>"
             + "<table class='dragTable'><tr><td class='left'><img src='iconsnew/black"
-            + number + ".png' /></td><td class='middle'>" + headerStr + "</td><td class='right'>"
+            + number + ".png' /></td><td class='middle'>" + headerStr + nameStr + addressStr + quantityStr  + "</td><td class='right'>"
             + (i ? "<button id='dragClose" + i + "' value='" + i + "'></button>" : "")
             + "</td></tr></table></li>";
         if (i == 0) {
             dragStr += "</ul><ul id='sortable'>";
         }
 
-        retStr += headerStr + "</div></td></tr>\n";
+        retStr += headerStr + " ***Stop : " + i + "***" + "</div></td></tr>\n";
         for (var j = 0; j < route.steps.length; ++j) {
             var classStr = "odd";
             if (j % 2 == 0) classStr = "even";
@@ -132,13 +138,13 @@ function formatDirections(gdir, mode) {
         }
         dragStr += "<li id='" + 0 + "' class='ui-state-disabled'>"
             + "<table class='dragTable'><tr><td><img src='iconsnew/black"
-            + 1 + ".png' /></td><td>" + headerStr
+            + 1 + ".png' /></td><td>" +  headerStr
             + "</td></tr></table></li>";
         retStr += "\t<tr class='heading'><td class='heading'>"
             + "<div class='centered-directions'><img src='../iconsnew/black1.png'></div></td>"
             + "<td class='heading'>"
             + "<div class='centered-directions'>"
-            + headerStr + "</div></td></tr>\n";
+            + "Back to Depot - " + headerStr  + "</div></td></tr>\n";
     } else if (mode == 1) {
         var headerStr;
         if (labels[order[gdir.legs.length]] != null && labels[order[gdir.legs.length]] != "") {
@@ -265,9 +271,11 @@ function initMap(center, zoom, div) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     gebMap = new google.maps.Map(div, myOptions);
-    google.maps.event.addListener(gebMap, "click", function (event) {
-        tsp.addWaypoint(event.latLng, addWaypointSuccessCallback);
-    });
+   /* Commented out by Ponnu
+    We don't need maps the clickable and user should not add waypoints*/
+//    google.maps.event.addListener(gebMap, "click", function (event) {
+//        tsp.addWaypoint(event.latLng, addWaypointSuccessCallback);
+//    });
 }
 
 function loadAtStart(lat, lng, zoom) {
@@ -477,35 +485,35 @@ function onSolveCallback(myTsp) {
         suppressMarkers: true });
 
     // Raw path output
-//    var bestPathLatLngStr = dir.legs[0].start_location.toString() + "\n";
-//    for (var i = 0; i < dir.legs.length; ++i) {
-//        bestPathLatLngStr += dir.legs[i].end_location.toString() + "\n";
-//    }
-//    document.getElementById("exportData_hidden").innerHTML =
-//        "<textarea id='outputList' rows='10' cols='40'>"
-//            + bestPathLatLngStr + "</textarea><br>";
-//
-//    // Raw path output with labels
-//    var labels = tsp.getLabels();
-//    var order = tsp.getOrder();
-//    var bestPathLabelStr = "";
-//    if (labels[order[0]] == null) {
-//        bestPathLabelStr += order[0];
-//    } else {
-//        bestPathLabelStr += labels[order[0]];
-//    }
-//    bestPathLabelStr += ": " + dir.legs[0].start_location.toString() + "\n";
-//    for (var i = 0; i < dir.legs.length; ++i) {
-//        if (labels[order[i + 1]] == null) {
-//            bestPathLabelStr += order[i + 1];
-//        } else {
-//            bestPathLabelStr += labels[order[i + 1]];
-//        }
-//        bestPathLabelStr += ": " + dir.legs[i].end_location.toString() + "\n";
-//    }
-//    document.getElementById("exportLabelData_hidden").innerHTML =
-//        "<textarea id='outputLabelList' rows='10' cols='40'>"
-//            + bestPathLabelStr + "</textarea><br>";
+    var bestPathLatLngStr = dir.legs[0].start_location.toString() + "\n";
+    for (var i = 0; i < dir.legs.length; ++i) {
+        bestPathLatLngStr += dir.legs[i].end_location.toString() + "\n";
+    }
+    document.getElementById("exportData_hidden").innerHTML =
+        "<textarea id='outputList' rows='10' cols='40'>"
+            + bestPathLatLngStr + "</textarea><br>";
+
+    // Raw path output with labels
+    var labels = tsp.getLabels();
+    var order = tsp.getOrder();
+    var bestPathLabelStr = "";
+    if (labels[order[0]] == null) {
+        bestPathLabelStr += order[0];
+    } else {
+        bestPathLabelStr += labels[order[0]];
+    }
+    bestPathLabelStr += ": " + dir.legs[0].start_location.toString() + "\n";
+    for (var i = 0; i < dir.legs.length; ++i) {
+        if (labels[order[i + 1]] == null) {
+            bestPathLabelStr += order[i + 1];
+        } else {
+            bestPathLabelStr += labels[order[i + 1]];
+        }
+        bestPathLabelStr += ": " + dir.legs[i].end_location.toString() + "\n";
+    }
+    document.getElementById("exportLabelData_hidden").innerHTML =
+        "<textarea id='outputLabelList' rows='10' cols='40'>"
+            + bestPathLabelStr + "</textarea><br>";
 
     // Optimal address order
     var addrs = tsp.getAddresses();
