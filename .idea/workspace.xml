@@ -26,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="37" selection-start="1920" selection-end="1921" vertical-scroll-proportion="0.0" vertical-offset="416" max-vertical-offset="4097">
+            <state line="140" column="84" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.3229885" vertical-offset="2099" max-vertical-offset="4097">
               <folding />
             </state>
           </provider>
@@ -53,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="p3script.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="p3script.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/p3script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="43" selection-start="7394" selection-end="7394" vertical-scroll-proportion="0.58816963" vertical-offset="3111" max-vertical-offset="6443">
+            <state line="214" column="43" selection-start="7394" selection-end="7394" vertical-scroll-proportion="0.0" vertical-offset="3111" max-vertical-offset="6443">
               <folding />
             </state>
           </provider>
@@ -102,10 +102,10 @@
         <option value="$PROJECT_DIR$/styles/jquery_ui_1.8.16.css" />
         <option value="$PROJECT_DIR$/../backup/p3.freshdirectvendor.us/scripts/travellingSalesMan.js" />
         <option value="$PROJECT_DIR$/styles/table.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/scripts/travellingSalesMan.js" />
         <option value="$PROJECT_DIR$/styles/style.css" />
         <option value="$PROJECT_DIR$/scripts/p3script.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -213,8 +213,8 @@
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -275,8 +275,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -378,13 +378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="37" selection-start="1920" selection-end="1921" vertical-scroll-proportion="0.0" vertical-offset="416" max-vertical-offset="4097">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/print.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="21" selection-start="536" selection-end="536" vertical-scroll-proportion="0.0" vertical-offset="2742" max-vertical-offset="3638">
@@ -401,7 +394,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/p3script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="43" selection-start="7394" selection-end="7394" vertical-scroll-proportion="0.58816963" vertical-offset="3111" max-vertical-offset="6443">
+        <state line="214" column="43" selection-start="7394" selection-end="7394" vertical-scroll-proportion="0.0" vertical-offset="3111" max-vertical-offset="6443">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="84" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.3229885" vertical-offset="2099" max-vertical-offset="4097">
           <folding />
         </state>
       </provider>
