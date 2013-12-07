@@ -1,5 +1,12 @@
-/**
- * Created by pnallasamy on 12/3/13.
+// JavaScript Document
+
+
+/*
+ This scirpt has been created as part of CSCIE-15 Course for Assignment P3
+ Here we handle functions such as validation, calculation of traveling time,
+ Generating random unloading time etc
+
+ Author: Ponnusamy Nallasamy
  */
 
 jQuery.noConflict();
@@ -32,8 +39,8 @@ function toggle(divId) {
 jQuery(function () {
     onBodyLoad();
 
-    //Auto Complete Plugin for geocoding
-    // jQuery("#depot").geocomplete();
+//Auto Complete Plugin for geocoding
+    // jQuery("#depot").geocomplete(); Tried to make it work, but could not :(
 
 //Accordion Menu
     jQuery("#accordion").accordion({
@@ -253,7 +260,7 @@ function addDeliveryValidator(onAllValid) {
 }
 var orderArray = {};
 function addDelivery() {
-    //call field validators. this calls an address check, which is ajax, so it has to handle success, pass in success function
+    //call field validators. this calls an address check so it has to handle success, pass in success function
     addDeliveryValidator(function () {
 
         var name = jQuery("#name");
@@ -262,13 +269,14 @@ function addDelivery() {
         var time = jQuery("#time");
         var orderdetails = jQuery("#orderdetails");
 
-
         //headers
         if (orderdetails.html() == '') {
-            orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th><th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">System Calculated Delivery Time</th></tr></table>');
+            orderdetails.append('<table cellpadding="5" width="85%" cellspacing="0" border="1"><tr><th width="30%">Customer Name</th>' +
+                '<th width="40%">Delivery Address</th><th width="15%">Quantity (in Gallons)</th><th width="15%">System Calculated Delivery Time</th></tr></table>');
         }
         time.val(Math.ceil(calculateTime(quantity.val())));
-        orderdetails.append('<table cellpadding="7" width="85%" cellspacing="0" border="1"><tr><td width="30%">' + name.val() + '</td><td width="40%">' + address.val() + '</td><td width="15%">' + quantity.val() + '</td><td width="15%">' + time.val() + '</td></tr></table>');
+        orderdetails.append('<table cellpadding="7" width="85%" cellspacing="0" border="1"><tr><td width="30%">' + name.val() + '</td>' +
+            '<td width="40%">' + address.val() + '</td><td width="15%">' + quantity.val() + '</td><td width="15%">' + time.val() + '</td></tr></table>');
 
 //        Add orders into Array for later reference
 //        orderArray.push(name, address, quantity);
@@ -278,14 +286,11 @@ function addDelivery() {
             "address": address.val(),
             "quantity": quantity.val()
         };
-        for ( var i in orderArray ) {
-            alert( orderArray[ i ] );
-        }
         clickedAddAddress();
     });
 
 }
-
+//Math function to calculate random number
 function calculateTime(quantity) {
     var fixedtime = Math.random();
     return  quantity * fixedtime;
@@ -320,24 +325,7 @@ function addDepot() {
         clearOrders();
     });
 }
-/*function printarray() {
- var elems = document.getElementsByTagName( "#orderdetails" );
- // Convert the NodeList to an Array
- var arr = jQuery.makeArray( elems );
- // Use an Array method on list of dom elements
- arr.reverse();
- jQuery( arr ).appendto( "#orderdetails");
- }
- */
-/*
- function geocodeget(){
- // Trigger geocoding request.
- jQuery("#Add!").click(function(){
- jQuery("#addressStr").trigger("geocode");
- });
- }
- */
-/**/
+
 function clearOrders() {
     /* jQuery("#saddressStr").val("");
      alert("#saddressStr".val());
@@ -349,27 +337,48 @@ function clearOrders() {
 
 //    $('#address')[0].reset();
 }
-
+//Validate the input fields in active accordion form
 function validate(active) {
     var elemArr = [];
 
+    if (active == 1) {
+        elemArr.push(jQuery("#date"));
+        elemArr.push(jQuery("#routenumber"));
+        elemArr.push(jQuery("#trklicense"));
 
-   if (active == 1) {
-            elemArr.push(jQuery("#date"));
-            elemArr.push(jQuery("#routenumber"));
-            elemArr.push(jQuery("#trklicense"));
+        return checkForNotBlank(elemArr);
+    }
+    else if (active == 2) {
 
-            return checkForNotBlank(elemArr);
+        elemArr.push(jQuery("#employeeid"));
+        elemArr.push(jQuery("#dname"));
+        elemArr.push(jQuery("#dlane"));
+        elemArr.push(jQuery("#cellno"));
+
+        return checkForNotBlank(elemArr);
+    }
+    else if (active == 3) {
+
+        elemArr.push(jQuery("#shift"));
+
+        return checkForNotBlank(elemArr);
+    }
+    else if (active == 4) {
+
+        elemArr.push(jQuery("#name"));
+        elemArr.push(jQuery("#adressstr"));
+        elemArr.push(jQuery("#quantity"));
+
+        return checkForNotBlank(elemArr);
     }
     return(true);
-
 }
 
 function checkForNotBlank(arr) {
-    var err =false;
-    jQuery(arr).each(function(i,e) {
+    var err = false;
+    jQuery(arr).each(function (i, e) {
         if (jQuery(e).val() == '') {
-            err=true;
+            err = true;
         }
     });
     return !err;

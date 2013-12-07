@@ -26,11 +26,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="168" column="51" selection-start="8901" selection-end="8901" vertical-scroll-proportion="-18.307692" vertical-offset="2380" max-vertical-offset="3944">
-              <folding />
+            <state line="161" column="36" selection-start="8231" selection-end="8231" vertical-scroll-proportion="0.6678161" vertical-offset="2156" max-vertical-offset="4080">
+              <folding>
+                <element signature="n#style#0;n#select#0;n#form#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#tr#0;n#table#0;n#div#3;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#4;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#table#0;n#form#0;n#div#4;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -38,16 +43,16 @@
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/styles/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="13" selection-start="2080" selection-end="2080" vertical-scroll-proportion="0.0" vertical-offset="2227" max-vertical-offset="7344">
+            <state line="262" column="16" selection-start="3761" selection-end="3761" vertical-scroll-proportion="0.0" vertical-offset="4454" max-vertical-offset="4777">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="table.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles/table.css">
+      <file leaf-file-name="print.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/print.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="25" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1734">
+            <state line="4" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="3638">
               <folding />
             </state>
           </provider>
@@ -56,10 +61,8 @@
       <file leaf-file-name="p3script.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/p3script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="275" column="32" selection-start="9872" selection-end="9872" vertical-scroll-proportion="0.0" vertical-offset="4281" max-vertical-offset="6477">
-              <folding>
-                <marker date="1386371756327" expanded="true" signature="9840:10073" placeholder="..." />
-              </folding>
+            <state line="351" column="0" selection-start="11985" selection-end="11985" vertical-scroll-proportion="0.0" vertical-offset="5734" max-vertical-offset="6630">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,16 +70,16 @@
       <file leaf-file-name="BpTspSolver.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/BpTspSolver.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="941" column="24" selection-start="28856" selection-end="28856" vertical-scroll-proportion="0.0" vertical-offset="15722" max-vertical-offset="20281">
+            <state line="941" column="24" selection-start="28856" selection-end="28856" vertical-scroll-proportion="0.0" vertical-offset="15997" max-vertical-offset="20281">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="travellingSalesMan.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="travellingSalesMan.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/travellingSalesMan.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="41" selection-start="3471" selection-end="3555" vertical-scroll-proportion="0.29052368" vertical-offset="1484" max-vertical-offset="10455">
+            <state line="103" column="3" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.0" vertical-offset="1751" max-vertical-offset="10421">
               <folding />
             </state>
           </provider>
@@ -105,18 +108,18 @@
         <option value="$PROJECT_DIR$/../backup/p3.freshdirectvendor.us/scripts/travellingSalesMan.js" />
         <option value="$PROJECT_DIR$/styles/table.css" />
         <option value="$PROJECT_DIR$/styles/style.css" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/scripts/p3script.js" />
         <option value="$PROJECT_DIR$/scripts/travellingSalesMan.js" />
+        <option value="$PROJECT_DIR$/scripts/p3script.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="-2" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -144,6 +147,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -206,7 +210,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -215,8 +218,8 @@
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -277,15 +280,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="-2" width="1296" height="1000" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1265625" sideWeight="0.6004415" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.118229166" sideWeight="0.6004415" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -327,11 +330,6 @@
         <state line="24" column="41" selection-start="1046" selection-end="1046" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/print.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="3638" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/jquery-ui-1.8.16.custom.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="104" column="53" selection-start="7580" selection-end="7580" vertical-scroll-proportion="0.50082374" vertical-offset="1464" max-vertical-offset="9741" />
@@ -352,13 +350,6 @@
         <state line="93" column="50" selection-start="6814" selection-end="6814" vertical-scroll-proportion="0.33252722" vertical-offset="1306" max-vertical-offset="9741" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/BpTspSolver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="941" column="24" selection-start="28856" selection-end="28856" vertical-scroll-proportion="0.0" vertical-offset="15722" max-vertical-offset="20281">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../backup/p3.freshdirectvendor.us/scripts/travellingSalesMan.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="219" column="0" selection-start="8115" selection-end="9394" vertical-scroll-proportion="0.14389358" vertical-offset="3604" max-vertical-offset="10319" />
@@ -369,40 +360,55 @@
         <state line="164" column="0" selection-start="2823" selection-end="2823" vertical-scroll-proportion="0.5888755" vertical-offset="2301" max-vertical-offset="3128" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/style.css">
+    <entry file="file://$PROJECT_DIR$/scripts/BpTspSolver.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="13" selection-start="2080" selection-end="2080" vertical-scroll-proportion="0.0" vertical-offset="2227" max-vertical-offset="7344">
+        <state line="941" column="24" selection-start="28856" selection-end="28856" vertical-scroll-proportion="0.0" vertical-offset="15722" max-vertical-offset="20281">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/print.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3638">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/styles/table.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="25" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1734">
+        <state line="15" column="0" selection-start="256" selection-end="650" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1734" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="262" column="16" selection-start="3761" selection-end="3761" vertical-scroll-proportion="0.0" vertical-offset="3626" max-vertical-offset="4777">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/scripts/travellingSalesMan.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="51" selection-start="8901" selection-end="8901" vertical-scroll-proportion="-18.307692" vertical-offset="2380" max-vertical-offset="3944">
+        <state line="103" column="3" selection-start="3494" selection-end="3494" vertical-scroll-proportion="0.0" vertical-offset="1751" max-vertical-offset="10421">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/p3script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="275" column="32" selection-start="9872" selection-end="9872" vertical-scroll-proportion="0.0" vertical-offset="4281" max-vertical-offset="6477">
-          <folding>
-            <marker date="1386371756327" expanded="true" signature="9840:10073" placeholder="..." />
-          </folding>
+        <state line="351" column="0" selection-start="11985" selection-end="11985" vertical-scroll-proportion="0.0" vertical-offset="5734" max-vertical-offset="6630">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/travellingSalesMan.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="41" selection-start="3471" selection-end="3555" vertical-scroll-proportion="0.29052368" vertical-offset="1484" max-vertical-offset="10455">
-          <folding />
+        <state line="161" column="36" selection-start="8231" selection-end="8231" vertical-scroll-proportion="0.6678161" vertical-offset="2156" max-vertical-offset="4080">
+          <folding>
+            <element signature="n#style#0;n#select#0;n#form#0;n#td#1;n#tr#1;n#table#0;n#div#1;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#tr#0;n#table#0;n#div#3;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#4;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#table#0;n#form#0;n#div#4;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -9,7 +9,6 @@
     <!--CSS-->
     <link rel="stylesheet" href="styles/style.css" type="text/css" media="screen">
     <link rel="stylesheet" href="styles/print.css" type="text/css" media="print">
-    <!--<link type="text/css" href="styles/jquery_ui_1.8.16.css" rel="stylesheet"/>-->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
           type="text/css" media="all"/>
 
@@ -60,15 +59,14 @@
                             to get the optimal solution, but the solution is likely to be close
                             to the best possible.</p>
 
-                        <p> Note: You can also simply left-click the map or enter an address
-                            and do simple optimized routing with out orders </p>
+                        <p></p>
                     </div>
 
                     <!--Start with Route information-->
                     <h3><a href="#" class='accHeader'> 1. Route / Truck Information</a></h3>
 
                     <div id='routeinfo'>
-                        <table class=mainTable>
+                        <table class=form>
                             <tr>
                                 <td>
                                     Date
@@ -85,11 +83,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Truck Starting Address(Depot)
-                                    </td>
+                                    Truck Starting Address (Depot Address)
+                                </td>
                                 <td>
                                     <form id="myform">
-                                        <select id="saddressStr">
+                                        <select id="saddressStr" style="width: 250px">
                                             <option value="Harvard Square, Cambridge, MA 02138">Harvard Square</option>
                                             <option value="2 Dry Dock Avenue, Boston, MA 02210">Boston Industrial Park
                                             </option>
@@ -97,9 +95,6 @@
                                         </select>
                                     </form>
                                 </td>
-                                <!--<td>-->
-                                    <!--<input type="button" value="Add Starting Location" onClick=" addDepot();">-->
-                                <!--</td>-->
                             </tr>
                         </table>
                     </div>
@@ -107,7 +102,7 @@
                     <h3><a href="#" class='accHeader'>2. Enter Driver Information</a></h3>
 
                     <div>
-                        <table>
+                        <table class="form">
                             <tr>
                                 <td>
                                     Employee ID
@@ -128,7 +123,7 @@
                                     <input type='number' id='cellno'>
                                 </td>
                                 <td>
-                                    Supervisor Name
+                                    Supervisor Name (Optional)
                                     <input type='text' id='supname'>
                                 </td>
                             </tr>
@@ -139,8 +134,12 @@
                     <h3><a href="#" class='accHeader'>3. Enter Shift Duration</a></h3>
 
                     <div>
-                        Shift Time in Hours
-                        <input type='text' id='shift'>
+                        <table class="form">
+                            <tr>
+                                Shift Time in Hours
+                                <input type='text' id='shift' style="width: 50px">
+                            </tr>
+                        </table>
                     </div>
 
                     <!--Order Details and Route Optimization -->
@@ -150,12 +149,13 @@
                         <!--<form name="address" onSubmit="clickedAddAddress(); return false;">-->
                         <form name="address" onSubmit="return false">
                             Add Customer Order Info and Address:
-                            <table id='orddet'>
+                            <table class="form">
                                 <tr>
                                     <td>Name: <input name="name" id="name" type="text" class="name"></td>
-                                    <td>Address: <input id="addressStr" name="addressStr" type="text" class="address" style = "width:210px">
-                                    </td>
-                                    <td>Quantity: <input id="quantity" name="quantity" type="text" class="qty"></td>
+                                    <td>Address: <input id="addressStr" name="addressStr" type="text" class="address"
+                                                  style="width:410px"> </td>
+                                    <td>Quantity (in Gallons): <input id="quantity" name="quantity" type="text" class="qty"
+                                                  style="width:120px"></td>
                                     <td><input id="time" name="time" type="hidden"></td>
                                     <td><input type="button" value="Add!" onClick=" addDelivery();"></td>
                                 </tr>
@@ -179,18 +179,27 @@
                     <div>
                         <p>Use this option only if there is any special requirement
                             to route the trucks with following options. </p>
+                        <table class="form">
+                            <tr>
+                                <td>
+                                    <form name="travelOpts">
+                                        <input id="avoidHighways" type="checkbox"/> Avoid highways
+                                        <br>
+                                        <input id="avoidTolls" type="checkbox"/> Avoid toll roads
+                                    </form>
+                                </td>
+                                <tr>
+                                <td>
 
-                        <form name="travelOpts">
-                            <input id="avoidHighways" type="checkbox"/> Avoid highways
-                            <br>
-                            <input id="avoidTolls" type="checkbox"/> Avoid toll roads
-                        </form>
-                        <br>
-
-                        <div>
-                            <input id="button1" class="calcButton" type="button" value="Optimize Delivery Route"
-                                   onClick="directions(0, document.forms['travelOpts'].avoidHighways.checked, document.forms['travelOpts'].avoidTolls.checked)">
-                        </div>
+                                    <div>
+                                        <input id="button1" class="calcButton" type="button"
+                                               value="Optimize Delivery Route"
+                                               onClick="directions(0, document.forms['travelOpts'].avoidHighways.checked, document.forms['travelOpts'].avoidTolls.checked)">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tr>
+                        </table>
                     </div>
 
                     <h3><a href="#" class='accHeader'>6. Edit Order Route Sequence </a></h3>
@@ -218,7 +227,6 @@
 
 <div id="dialogProgress" title="Calculating route...">
     <div id="progressBar"></div>
-    <!--ClosePo-->
 </div>
 <div id="dialog" title="Basic dialog">
 

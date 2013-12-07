@@ -2,6 +2,9 @@
 
 
 /* Modified Script for P3 Assignment - CSCIE15 - Ponnu
+ few of the modifications to list...
+ (1) Disabled Map interaction
+ (2) Added Array of details along with routing address
 
  This should serve as an example on how to use the more general BpTspSolver.js
  from http://code.google.com/p/google-maps-tsp-solver/
@@ -107,14 +110,14 @@ function formatDirections(gdir, mode) {
         dragStr += "<li id='" + i + "' class='ui-state-"
             + (i ? "default" : "disabled") + "'>"
             + "<table class='dragTable'><tr><td class='left'><img src='iconsnew/black"
-            + number + ".png' /></td><td class='middle'>" + headerStr + nameStr + addressStr + quantityStr  + "</td><td class='right'>"
+            + number + ".png' /></td><td class='middle'>" + headerStr + " -- Customer Name : " + nameStr + " & " + quantityStr + "Gallons" + "</td><td class='right'>"
             + (i ? "<button id='dragClose" + i + "' value='" + i + "'></button>" : "")
             + "</td></tr></table></li>";
         if (i == 0) {
             dragStr += "</ul><ul id='sortable'>";
         }
 
-        retStr += headerStr + " ***Stop : " + i + "***" + "</div></td></tr>\n";
+        retStr += headerStr + " -- Customer Name : " + nameStr + "&" + quantityStr + "Gallons" + " Stop : " + i + " " + "</div></td></tr>\n";
         for (var j = 0; j < route.steps.length; ++j) {
             var classStr = "odd";
             if (j % 2 == 0) classStr = "even";
@@ -138,13 +141,13 @@ function formatDirections(gdir, mode) {
         }
         dragStr += "<li id='" + 0 + "' class='ui-state-disabled'>"
             + "<table class='dragTable'><tr><td><img src='iconsnew/black"
-            + 1 + ".png' /></td><td>" +  headerStr
+            + 1 + ".png' /></td><td>" + headerStr
             + "</td></tr></table></li>";
         retStr += "\t<tr class='heading'><td class='heading'>"
             + "<div class='centered-directions'><img src='../iconsnew/black1.png'></div></td>"
             + "<td class='heading'>"
             + "<div class='centered-directions'>"
-            + "Back to Depot - " + headerStr  + "</div></td></tr>\n";
+            + "Back to Depot - " + headerStr + "</div></td></tr>\n";
     } else if (mode == 1) {
         var headerStr;
         if (labels[order[gdir.legs.length]] != null && labels[order[gdir.legs.length]] != "") {
@@ -271,11 +274,6 @@ function initMap(center, zoom, div) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     gebMap = new google.maps.Map(div, myOptions);
-   /* Commented out by Ponnu
-    We don't need maps the clickable and user should not add waypoints*/
-//    google.maps.event.addListener(gebMap, "click", function (event) {
-//        tsp.addWaypoint(event.latLng, addWaypointSuccessCallback);
-//    });
 }
 
 function loadAtStart(lat, lng, zoom) {
