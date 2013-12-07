@@ -138,17 +138,6 @@ jQuery(function () {
     });
 });
 
-/* simple phone number validator
- *	pass in value as String
- *		accepts numbs, '1234567890' or '1-123-456-7890'
- *	returns true/false validation
- */
-function phoneCheck(valVar) {
-    //check for param, or default to 0. change to a string for match
-    var val = ((arguments.length) ? arguments[0] : 0).toString();
-    //replace out dashes if they exist, then match against 10 digits
-    return (val.replace(/\-/g, '').match(/^\d{10}/)) ? true : false;
-}
 
 /* copy of addAddress from library to do validation instead
  *	passing in dual callbacks to handle validation since it's an ajax call
