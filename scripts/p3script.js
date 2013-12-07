@@ -92,13 +92,12 @@ jQuery(function () {
         var contents = jQuery('<div>').html(jQuery('#my_textual_div').clone()).html();
 
         // Build the HTML content for that window, including the contents
-        var html = '<html><head><link rel="stylesheet" href="/styles/print.css" type="text/css"></head><body>' + routeinfo + contentduration + contents + '</body></html>';
+        var html = '<html><head><link rel="stylesheet" href="/styles/print.css" type="text/css"></head><body>' + contentduration + contents + '</body></html>';
 
         // Write to our new window
         print_window.document.open();
         print_window.document.write(html);
         print_window.document.close();
-
     });
 
     //Use this function to validate the menus and to take the user in a sequence
