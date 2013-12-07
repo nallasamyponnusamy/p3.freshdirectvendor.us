@@ -124,7 +124,8 @@ jQuery(function () {
                         }
                     },
                     open: function (event, ui) {
-                        jQuery("#dialog").append('<p> You must fill in all the required information to continue!</p>');
+                        jQuery("#dialog").append('<p> You must fill in all the required ' +
+                            'information to continue and make sure phone and shift are number!</p>');
                         originalContent = jQuery("#dialog").html();
                     },
                     close: function (event, ui) {
@@ -338,7 +339,6 @@ function validate(active) {
         return checkForNotBlank(elemArr);
     }
     else if (active == 2) {
-
         elemArr.push(jQuery("#employeeid"));
         elemArr.push(jQuery("#dname"));
         elemArr.push(jQuery("#dlname"));
@@ -347,13 +347,11 @@ function validate(active) {
         return checkForNotBlank(elemArr);
     }
     else if (active == 3) {
-
         elemArr.push(jQuery("#shift"));
 
         return checkForNotBlank(elemArr);
     }
     else if (active == 4) {
-
         elemArr.push(jQuery("#name"));
         elemArr.push(jQuery("#adressstr"));
         elemArr.push(jQuery("#quantity"));
