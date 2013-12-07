@@ -110,14 +110,14 @@ function formatDirections(gdir, mode) {
         dragStr += "<li id='" + i + "' class='ui-state-"
             + (i ? "default" : "disabled") + "'>"
             + "<table class='dragTable'><tr><td class='left'><img src='iconsnew/black"
-            + number + ".png' /></td><td class='middle'>" + headerStr + " -- Customer Name : " + nameStr + " & " + quantityStr + "Gallons" + "</td><td class='right'>"
+            + number + ".png' /></td><td class='middle'>" + headerStr + " -- Customer Name : " + nameStr + " and Ord Qty " + quantityStr + "Gallons" + "</td><td class='right'>"
             + (i ? "<button id='dragClose" + i + "' value='" + i + "'></button>" : "")
             + "</td></tr></table></li>";
         if (i == 0) {
             dragStr += "</ul><ul id='sortable'>";
         }
 
-        retStr += headerStr + " -- Customer Name : " + nameStr + "&" + quantityStr + "Gallons" + " Stop : " + i + " " + "</div></td></tr>\n";
+        retStr += headerStr + " -- Customer Name : " + nameStr + "and Ord Qty " + quantityStr + "Gallons" + " Stop : " + i + " " + "</div></td></tr>\n";
         for (var j = 0; j < route.steps.length; ++j) {
             var classStr = "odd";
             if (j % 2 == 0) classStr = "even";

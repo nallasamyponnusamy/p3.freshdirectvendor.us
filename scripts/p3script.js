@@ -63,18 +63,33 @@ jQuery(function () {
     // Map window size
     jQuery('.myMap').height(jQuery(window).height() - 80.);
 
-//Print button to print only the direction
+    //Print button to print only the direction
     jQuery('#print-button').click(function () {
-        alert("boo");
-//        jQuery('#manifest').append('Driver Name' + jQuery('#dfname').val());
-//         then use the canvas 2D drawing functions to add text, etc. for the result
-//        window.open('', document.getElementById('#map').toDataURL());
-        var print_window = window.open('', '_blank', '');
+        jQuery(function () {
+            jQuery("#dialog").prop('title', 'For Your Information!');
+            var originalContent;
+            jQuery("#dialog").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        jQuery(this).dialog("close");
+                    }
+                },
+                open: function (event, ui) {
+                    jQuery("#dialog").append('<p> The Print Out Will Contain Total Miles, Time, Order Details, Turn' +
+                        'by Turn Navigation Information and NO Map!</p>');
+                    originalContent = jQuery("#dialog").html();
+                },
+                close: function (event, ui) {
+                    jQuery("#dialog").html('');
+                }
+            });
 
+        });
+        var print_window = window.open('', '_blank', '');
         // Get the content we want to put in that window - this line is a little tricky to understand, but it gets the job done
         var contentduration = jQuery('<div>').html(jQuery('#path').clone()).html();
         var contents = jQuery('<div>').html(jQuery('#my_textual_div').clone()).html();
-        var routeinfo = jQuery('<div>').html(jQuery('#routeinfo').clone()).html();
 
         // Build the HTML content for that window, including the contents
         var html = '<html><head><link rel="stylesheet" href="/styles/print.css" type="text/css"></head><body>' + routeinfo + contentduration + contents + '</body></html>';
@@ -98,10 +113,9 @@ jQuery(function () {
                 addDepot();
             }
             jQuery("#accordion").accordion('activate', newactive);
-//            alert('boo,' + newactive);
         } else {
             jQuery(function () {
-                jQuery("#dialog").prop('title', 'Sorry, You have missed something!');
+                jQuery("#dialog").prop('title', 'For Your Information!');
                 var originalContent;
                 jQuery("#dialog").dialog({
                     modal: true,
@@ -111,7 +125,7 @@ jQuery(function () {
                         }
                     },
                     open: function (event, ui) {
-                        jQuery("#dialog").append('<p> You must fill in all the required informations to continue!</p>');
+                        jQuery("#dialog").append('<p> You must fill in all the required information to continue!</p>');
                         originalContent = jQuery("#dialog").html();
                     },
                     close: function (event, ui) {
@@ -203,7 +217,6 @@ function resetPage() {
     //and error msgs
     jQuery('.err').hide();
     //call old startOver method
-
     //reset accordion menu
     jQuery("#accordion").accordion('activate', 0);
 
@@ -303,7 +316,7 @@ function addDepot() {
         return;
     }
     jQuery(function () {
-        jQuery("#dialog").prop('title', 'You have added');
+        jQuery("#dialog").prop('title', 'Please Note');
         var originalContent;
         jQuery("#dialog").dialog({
             modal: true,
@@ -322,21 +335,9 @@ function addDepot() {
         });
 
         clickedAddAddress();
-        clearOrders();
     });
 }
 
-function clearOrders() {
-    /* jQuery("#saddressStr").val("");
-     alert("#saddressStr".val());
-     //     jQuery("#name").val("");
-     //     jQuery("#quantity").val("");*/
-
-//        $(this).closest('address').find("input[type=text], textarea").val("");
-
-
-//    $('#address')[0].reset();
-}
 //Validate the input fields in active accordion form
 function validate(active) {
     var elemArr = [];
@@ -352,7 +353,7 @@ function validate(active) {
 
         elemArr.push(jQuery("#employeeid"));
         elemArr.push(jQuery("#dname"));
-        elemArr.push(jQuery("#dlane"));
+        elemArr.push(jQuery("#dlname"));
         elemArr.push(jQuery("#cellno"));
 
         return checkForNotBlank(elemArr);
